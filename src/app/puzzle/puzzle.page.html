@@ -1,0 +1,115 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cherry Math Puzzle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <h2>Time: 00:00</h2>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="ion-text-end">
+           
+          </div>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
+    <br>
+    <div class="row">
+      <div class="box flex-container box-a"> 
+        <span class="label">A</span>
+        <!-- Input Box A -->
+        <input type="text" id="a" [(ngModel)]="a">
+      </div>
+      <div class="operator flex-container">
+        <span class="sign">+</span>
+      </div>
+      <div class="box flex-container box-b">
+        <span class="label">B</span>
+        <!-- Input Box B -->
+        <input type="text" id="b" [(ngModel)]="b">
+      </div>
+      <div class="answer flex-container">
+        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ answerA }}</span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="box flex-container box-c">
+        <span class="label">C</span>
+        <!-- Input Box C -->
+        <input type="text" id="c" [(ngModel)]="c">
+      </div>
+      <div class="operator flex-container">
+        <span class="sign">+</span>
+      </div>
+      <div class="box flex-container  box-d" color="primary">
+        <span class="label">D</span>
+        <!-- Input Box D -->
+        <input type="text" id="d" [(ngModel)]="d">
+      </div>
+      <div class="answer flex-container">
+        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ answerB }}</span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="row">
+      <div class="box no-border">
+        <span class="equals">=</span>
+      </div>
+      <div class="operator">
+          &nbsp;
+      </div>
+      <div class="box no-border">
+        <span class="equals">=</span>
+      </div>
+      <div class="answer">
+        
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    
+    <div class="row">
+      <div class="box no-border">
+        <span class="ans">{{ answerC }}</span>
+      </div>
+      <div class="operator">
+          &nbsp;
+      </div>
+      <div class="box no-border">
+        <!-- Answer  -->
+        <span class="ans">{{ answerD }}</span>
+      </div>
+      <div class="answer">
+        
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <ul id="errors">
+      <li *ngFor="let error of errors"> {{ error }}</li>
+ 
+    </ul>
+    <div class="ion-text-end">
+      <br>
+      <button class="btn" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</ion-content>
