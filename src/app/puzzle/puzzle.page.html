@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Cherry Math Puzzle</ion-title>
+    <ion-title>Box Math Puzzle</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div>
+          <div class="header">
+            <small>Stage 1/10</small>
             <h2>Time: 00:00</h2>
           </div>
         </ion-col>
@@ -30,43 +31,60 @@
       </ion-row>
     </ion-grid>
     <br>
+    <!-- A + B | SET A -->
     <div class="row">
       <div class="box flex-container box-a"> 
         <span class="label">A</span>
         <!-- Input Box A -->
-        <input type="text" id="a" [(ngModel)]="a">
+        <input type="text" id="a" [(ngModel)]="problem.inputs.a">
       </div>
       <div class="operator flex-container">
-        <span class="sign">+</span>
+        <span class="sign">{{ problem.operators.setA }}</span>
       </div>
       <div class="box flex-container box-b">
         <span class="label">B</span>
         <!-- Input Box B -->
-        <input type="text" id="b" [(ngModel)]="b">
+        <input type="text" id="b" [(ngModel)]="problem.inputs.b">
       </div>
       <div class="answer flex-container">
-        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ answerA }}</span>
+        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerA }}</span>
+      </div>
+    </div>
+    <!-- End of SET A -->
+    <div class="clearfix"></div>
+    <br>
+    <div class="row">
+      <div class="box no-border">
+        <span class="sign">{{ problem.operators.setD }}</span>
+      </div>
+      <div class="operator">
+          &nbsp;
+      </div>
+      <div class="box no-border">
+        <span class="sign">{{ problem.operators.setB }}</span>
+      </div>
+      <div class="answer">
+        
       </div>
     </div>
     <div class="clearfix"></div>
-    <br>
     <br>
     <div class="row">
       <div class="box flex-container box-c">
         <span class="label">C</span>
         <!-- Input Box C -->
-        <input type="text" id="c" [(ngModel)]="c">
+        <input type="text" id="c" [(ngModel)]="problem.inputs.c">
       </div>
       <div class="operator flex-container">
-        <span class="sign">+</span>
+        <span class="sign">{{ problem.operators.setC }}</span>
       </div>
       <div class="box flex-container  box-d" color="primary">
         <span class="label">D</span>
         <!-- Input Box D -->
-        <input type="text" id="d" [(ngModel)]="d">
+        <input type="text" id="d" [(ngModel)]="problem.inputs.d">
       </div>
       <div class="answer flex-container">
-        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ answerB }}</span>
+        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerB }}</span>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -89,20 +107,25 @@
     
     <div class="row">
       <div class="box no-border">
-        <span class="ans">{{ answerC }}</span>
+        <span class="ans">{{ problem.answers.answerC }}</span>
       </div>
       <div class="operator">
           &nbsp;
       </div>
       <div class="box no-border">
         <!-- Answer  -->
-        <span class="ans">{{ answerD }}</span>
+        <span class="ans">{{ problem.answers.answerD }}</span>
       </div>
       <div class="answer">
         
       </div>
     </div>
     <div class="clearfix"></div>
+
+    {{ problem.inputs.a }} <br>
+    {{ problem.inputs.b }} <br>
+    {{ problem.inputs.c }} <br>
+    {{ problem.inputs.d }} <br>
     <ul id="errors">
       <li *ngFor="let error of errors"> {{ error }}</li>
  

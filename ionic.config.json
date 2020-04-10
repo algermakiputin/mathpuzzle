@@ -1,7 +1,8 @@
 {
   "name": "mathpuzzle",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./puzzle/puzzle.module').then( m => m.PuzzlePageModule)
+  },
+  {
+    path: 'modal',
+    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
   }
 ];
 
