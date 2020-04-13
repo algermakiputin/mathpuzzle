@@ -1,0 +1,12 @@
+ .actions {
+     position: absolute;
+     left: 50%;
+     top: 50%;
+     transform: translate(-50%, -50%);
+     text-align: center;
+ }
+
+ .actions button {
+     padding: 20px;
+     font-size: 1.5em;
+ }

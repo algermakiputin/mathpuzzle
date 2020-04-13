@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { Storage } from "@ionic/storage";  
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,8 +15,8 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
+      title: 'Home',
+      url: '/home',
       icon: 'home'
     },
   
@@ -24,8 +26,11 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public storage: Storage
   ) {
+
+    storage.set("test", 2);
     this.initializeApp();
   }
 

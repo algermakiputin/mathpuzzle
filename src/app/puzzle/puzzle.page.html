@@ -19,8 +19,8 @@
       <ion-row>
         <ion-col>
           <div class="header">
-            <small>Stage 1/10</small>
-            <h2>Time: 00:00</h2>
+            <small>Stage {{ stage }}/10</small>
+            <h2>Time: {{ pad2(minutes) }}:{{ pad2(seconds) }}</h2>
           </div>
         </ion-col>
         <ion-col>
@@ -33,7 +33,7 @@
     <br>
     <!-- A + B | SET A -->
     <div class="row">
-      <div class="box flex-container box-a"> 
+      <div class="box flex-container box-a" [class.scale-in-center]="animate"> 
         <span class="label">A</span>
         <!-- Input Box A -->
         <input type="text" id="a" [(ngModel)]="problem.inputs.a">
@@ -41,12 +41,13 @@
       <div class="operator flex-container">
         <span class="sign">{{ problem.operators.setA }}</span>
       </div>
-      <div class="box flex-container box-b">
+      <div class="box flex-container box-b" [class.scale-in-center]="animate">
         <span class="label">B</span>
         <!-- Input Box B -->
         <input type="text" id="b" [(ngModel)]="problem.inputs.b">
       </div>
       <div class="answer flex-container">
+        <!-- Left Top Answer -->
         <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerA }}</span>
       </div>
     </div>
@@ -55,13 +56,13 @@
     <br>
     <div class="row">
       <div class="box no-border">
-        <span class="sign">{{ problem.operators.setD }}</span>
+        <span class="sign">{{ problem.operators.setC }}</span>
       </div>
       <div class="operator">
           &nbsp;
       </div>
       <div class="box no-border">
-        <span class="sign">{{ problem.operators.setB }}</span>
+        <span class="sign">{{ problem.operators.setD }}</span>
       </div>
       <div class="answer">
         
@@ -70,21 +71,22 @@
     <div class="clearfix"></div>
     <br>
     <div class="row">
-      <div class="box flex-container box-c">
+      <div class="box flex-container box-c" [class.scale-in-center]="animate">
         <span class="label">C</span>
         <!-- Input Box C -->
         <input type="text" id="c" [(ngModel)]="problem.inputs.c">
       </div>
       <div class="operator flex-container">
-        <span class="sign">{{ problem.operators.setC }}</span>
+        <span class="sign">{{ problem.operators.setB }}</span>
       </div>
-      <div class="box flex-container  box-d" color="primary">
+      <div class="box flex-container box-d" [class.scale-in-center]="animate" color="primary">
         <span class="label">D</span>
         <!-- Input Box D -->
         <input type="text" id="d" [(ngModel)]="problem.inputs.d">
       </div>
       <div class="answer flex-container">
-        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerB }}</span>
+        <!-- Right Bottom Answer B -->
+        <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerB }} </span>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -107,32 +109,28 @@
     
     <div class="row">
       <div class="box no-border">
-        <span class="ans">{{ problem.answers.answerC }}</span>
-      </div>
-      <div class="operator">
-          &nbsp;
-      </div>
-      <div class="box no-border">
-        <!-- Answer  -->
+        <!-- Bottom Left Answer -->
         <span class="ans">{{ problem.answers.answerD }}</span>
       </div>
+      <div class="operator">
+          &nbsp;
+      </div>
+      <div class="box no-border">
+        <!-- Answer  Bottom Right -->
+        <span class="ans">{{ problem.answers.answerC }}</span>
+      </div>
       <div class="answer">
         
       </div>
     </div>
-    <div class="clearfix"></div>
-
-    {{ problem.inputs.a }} <br>
-    {{ problem.inputs.b }} <br>
-    {{ problem.inputs.c }} <br>
-    {{ problem.inputs.d }} <br>
+    <div class="clearfix"></div> 
     <ul id="errors">
       <li *ngFor="let error of errors"> {{ error }}</li>
  
     </ul>
     <div class="ion-text-end">
       <br>
-      <button class="btn" (click)="onSubmit()">Submit</button>
+      <button class="btn" id="submit-btn" (click)="onSubmit()">Submit</button>
     </div>
   </div>
 </ion-content>
