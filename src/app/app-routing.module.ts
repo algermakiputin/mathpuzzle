@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
    
   {
-    path: '',
+    path: 'puzzle',
     loadChildren: () => import('./puzzle/puzzle.module').then( m => m.PuzzlePageModule)
   },
   {
@@ -12,8 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
   },
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'congratulations',
+    loadChildren: () => import('./congratulations/congratulations.module').then( m => m.CongratulationsPageModule)
   }
 ];
 

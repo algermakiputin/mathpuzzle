@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
- 
 import { Router } from '@angular/router';
+import { GlobalService } from "../global.service";
 
 @Component({
   selector: 'app-home',
@@ -10,19 +10,44 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
 
   stage: any;
-  constructor(private router: Router) { 
+  continue: any;
+  constructor(
+    private router: Router,
+    public global: GlobalService ) { 
  
-    this.stage = window.localStorage.getItem("stage");
+    global.stage = window.localStorage.getItem("stage"); 
+    this.continue = window.localStorage.getItem("continue");
+
+ 
   }
 
   ngOnInit() {
+    
   }
 
   playGame() {
 
-    this.router.navigate(['/']);
+    if ( parseInt(this.global.stage) > 1) {
+   
+      window.localStorage.setItem('stage', "1");
+      window.localStorage.setItem('continue', "false");
+      this.continue = false;
+      this.global.stage = 1;
+ 
+    }
+ 
+
+    this.router.navigate(['/puzzle']);
 
   }
+
+  continue_play() {
+
+    this.router.navigate(['/puzzle']);
+
+  }
+
+
  
  
 

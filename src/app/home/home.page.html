@@ -1,14 +1,23 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+ 
 
 <ion-content>
   <div class="wrapper">
+    <div>
+      <h1>Math Puzzle</h1>
+    </div>
      <div class="actions">
-        <button (click)="playGame()">Play Game</button>
-        <small>Stage {{ stage }}/10</small>
+        
+        <div *ngIf="continue == 'true'">
+          <button (click)="continue_play()" class="continueButton">Continue Stage {{ global.stage }}/10</button>
+        </div>
+          <br>
+        <div>
+          <button (click)="playGame()" class="playButton"> {{ stage > 1 ? "Restart" : "Play Game" }}</button>
+        </div>
+        <br> 
+        
      </div>
+     <p>&copy; 2020 Developed by <a href="https://algermakiputin.github.io/portfolio">Alger</a></p>
   </div>
+  
 </ion-content>

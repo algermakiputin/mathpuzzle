@@ -1,25 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Box Math Puzzle</ion-title>
-  </ion-toolbar>
-</ion-header>
+ 
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <header>
+    <span class="title">Math Puzzle
+
+      <a (click)="backToHome()">  <ion-icon name="home"></ion-icon></a>
+    </span>
+
+    
+  </header>
 
   <div id="container">
     <ion-grid>
       <ion-row>
         <ion-col>
           <div class="header">
-            <small>Stage {{ stage }}/10</small>
+            <small>Stage {{ global.stage }}/10</small>
             <h2>Time: {{ pad2(minutes) }}:{{ pad2(seconds) }}</h2>
           </div>
         </ion-col>
@@ -46,7 +42,7 @@
         <!-- Input Box B -->
         <input type="text" id="b" [(ngModel)]="problem.inputs.b">
       </div>
-      <div class="answer flex-container">
+      <div class="answer flex-container" [class.flip-horizontal-bottom]="animate">
         <!-- Left Top Answer -->
         <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerA }}</span>
       </div>
@@ -84,7 +80,7 @@
         <!-- Input Box D -->
         <input type="text" id="d" [(ngModel)]="problem.inputs.d">
       </div>
-      <div class="answer flex-container">
+      <div class="answer flex-container" [class.flip-horizontal-bottom]="animate">
         <!-- Right Bottom Answer B -->
         <span class="equals">=</span> &nbsp;&nbsp;<span class="ans">{{ problem.answers.answerB }} </span>
       </div>
@@ -108,16 +104,16 @@
     <div class="clearfix"></div>
     
     <div class="row">
-      <div class="box no-border">
+      <div class="box no-border" [class.flip-horizontal-bottom]="animate">
         <!-- Bottom Left Answer -->
-        <span class="ans">{{ problem.answers.answerD }}</span>
+        <span class="ans" >{{ problem.answers.answerD }}</span>
       </div>
       <div class="operator">
           &nbsp;
       </div>
-      <div class="box no-border">
+      <div class="box no-border" [class.flip-horizontal-bottom]="animate">
         <!-- Answer  Bottom Right -->
-        <span class="ans">{{ problem.answers.answerC }}</span>
+        <span class="ans" >{{ problem.answers.answerC }}</span>
       </div>
       <div class="answer">
         

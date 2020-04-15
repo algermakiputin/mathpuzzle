@@ -1,0 +1,46 @@
+// css-anim-congratz
+#congratulations{margin: auto; max-width:245px;padding-top: 15em;}
+span{width:20px; height:10px;display:block;border-radius:10px;
+float:left;}
+
+span:nth-child(2n-1){background:#1A535C; animation:bar1 0.8s infinite ease;}
+
+span:nth-child(2n){background:#4ECDC4;animation:bar2 0.8s infinite ease;}
+
+@keyframes bar1{
+0%{background:#1A535C}100%{background:#4ECDC4}
+}
+
+@keyframes bar2{
+0%{background:#4ECDC4}100%{background:#1A535C}
+}
+
+h2{
+ 
+text-align: center;
+margin: 0;
+padding: 15px;
+padding-top: 23px;
+font-size:1.25em;}
+
+#content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/puzzle-background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p {
+    text-align: center;
+    margin-top: 40px;
+}

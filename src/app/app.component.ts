@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     public storage: Storage
   ) {
-
+ 
     storage.set("test", 2);
     this.initializeApp();
   }

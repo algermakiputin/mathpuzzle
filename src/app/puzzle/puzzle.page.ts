@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core'; 
-import { Storage } from "@ionic/storage";   
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Component, OnInit } from '@angular/core';   
+import { Router } from '@angular/router';
+import * as data from "../../assets/puzzle.json";
+import { GlobalService } from "../global.service";
+
 
 @Component({
   selector: 'app-puzzle',
@@ -9,98 +11,28 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 })
 export class PuzzlePage implements OnInit {
   
-  puzzles = {
-    1 : {
-      inputs : { 
-        a : "3.5",
-        b : "4.5",
-        c : "9.5",
-        d : "3.5"
-      }, 
-      answers : {
-        answerA : 8,  
-        answerB : 6,
-        answerC : 13,
-        answerD : 8,
-      },
-      operators: {
-        "setA" : "+",  // A + B
-        "setB" : "-",  // C + D
-        "setC" : "+",  // A & C
-        "setD" : "+",  // B & D
-      }
-    },
-
-    2 : {
-      inputs : { 
-        a : "7",
-        b : "9",
-        c : "19",
-        d : "7"
-      },
-      signs : {
-        aSign: "+",
-        bSign: "+",
-        cSign: "+",
-        dSign: "+"
-      },
-      answers : {
-        answerA : 16, // A + B
-        answerB : 12, // C + D
-        answerC : 26, // A + C
-        answerD : 16, // B + D
-      },
-      operators: {
-        "setA" : "+",  // A + B
-        "setB" : "-",  // C + D
-        "setC" : "+",  // A + C
-        "setD" : "+",  // B + D
-      }
-    },
-    
-    3 : {
-      inputs : { 
-        a : "1.5",
-        b : "12.5",
-        c : "13.5",
-        d : "3.5"
-      }, 
-      answers : {
-        answerA : 14, // A + B
-        answerB : 10, // C + D
-        answerC : 15, // A + C
-        answerD : 16, // B + D
-      },
-      operators: {
-        "setA" : "+",  // A + B
-        "setB" : "-",  // C + D
-        "setC" : "+",  // A + C
-        "setD" : "+",  // B + D
-      }
-    },
- 
-  }
+  puzzles: any;
 
   animate = false;
   minutes = 0;
   seconds = 0;
-  stage = 1; // The current Puzzle to solve
   problem; // Stores of the puzzle level to solve
   errors = []; //  Stores every errors
   nextStage = false; // When all answer are correct, will be set to true to proceed to next level.
    
-  constructor(public storage: Storage) { 
+  constructor(private router: Router, public global: GlobalService) {
+     
+    global.stage = parseInt(this.get_storage());  
+    this.puzzles = data; 
+    this.puzzles = this.puzzles.default;
     
-    window.localStorage.setItem('stage', '1');
-    this.stage = parseInt(this.get_storage()); 
- 
-    
+     
   }
 
   ngOnInit() { 
  
     this.start_timer();
-    this.problem = this.puzzles[this.stage];  
+    this.problem = this.puzzles[this.global.stage];  
   }
 
   onSubmit() {
@@ -128,7 +60,7 @@ export class PuzzlePage implements OnInit {
 
       this.nextStage = true; 
        
-      alert("Ready for next round");
+      alert("Congratulations! you solved the puzzle, Ready for the next round");
       this.nextRound();
     }
     
@@ -146,13 +78,23 @@ export class PuzzlePage implements OnInit {
 
   nextRound() {
 
-    if (this.stage == 10) 
-      return alert( "You win! Congratulations");
+    if (this.global.stage == 10) {
+      alert( "You win! Congratulations");
+      window.localStorage.setItem("stage", "1");
+      window.localStorage.setItem("continue", "false");
+      this.router.navigate(['/congratulations']);
+    
+      this.global.stage = 1;
+
+      return false;
+
+    }
+      
      
     this.reset_time();
     this.set_storage();
     this.entrance();
-    this.problem = this.puzzles[this.stage];
+    this.problem = this.puzzles[this.global.stage];
     this.start_timer();
   }   
 
@@ -175,7 +117,10 @@ export class PuzzlePage implements OnInit {
     storage = storage == null ? 1 : parseInt(storage);
      
     storage++; 
-    this.stage = storage; 
+    this.global.stage = storage; 
+
+    if (storage > 1)
+      window.localStorage.setItem("continue", "true");
 
     window.localStorage.setItem("stage", storage.toString());
   }
@@ -202,12 +147,19 @@ export class PuzzlePage implements OnInit {
         this.seconds = 0;
         this.minutes++;
       }
-    }, 1000);
+    }, 2000);
   }
   
   reset_time() {
     this.minutes = 0;
     this.seconds = 0;
   }
+
+  backToHome() {
+
+    this.router.navigate(['/']);
+  } 
+
+  
   
 }
