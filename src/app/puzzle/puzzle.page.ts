@@ -25,13 +25,13 @@ export class PuzzlePage implements OnInit {
     global.stage = parseInt(this.get_storage());  
     this.puzzles = data; 
     this.puzzles = this.puzzles.default;
-    
      
   }
 
   ngOnInit() { 
  
     this.start_timer();
+ 
     this.problem = this.puzzles[this.global.stage];  
   }
 
@@ -58,9 +58,14 @@ export class PuzzlePage implements OnInit {
  
     if ( !this.errors.length ) {
 
-      this.nextStage = true; 
+      this.problem.inputs.a = "";
+      this.problem.inputs.b = "";
+      this.problem.inputs.c = "";
+      this.problem.inputs.d = "";
        
+      this.nextStage = true; 
       alert("Congratulations! you solved the puzzle, Ready for the next round");
+      
       this.nextRound();
     }
     
@@ -83,9 +88,10 @@ export class PuzzlePage implements OnInit {
       window.localStorage.setItem("stage", "1");
       window.localStorage.setItem("continue", "false");
       this.router.navigate(['/congratulations']);
-    
+      
       this.global.stage = 1;
-
+      this.global.continue = "false";
+        
       return false;
 
     }
@@ -95,6 +101,8 @@ export class PuzzlePage implements OnInit {
     this.set_storage();
     this.entrance();
     this.problem = this.puzzles[this.global.stage];
+    
+    this.global.continue = "true";
     this.start_timer();
   }   
 

@@ -5,14 +5,13 @@
     <div>
       <h1>Math Puzzle</h1>
     </div>
-     <div class="actions">
-        
-        <div *ngIf="continue == 'true'">
+     <div class="actions"> 
+        <div *ngIf="global.continue == 'true'">
           <button (click)="continue_play()" class="continueButton">Continue Stage {{ global.stage }}/10</button>
         </div>
           <br>
         <div>
-          <button (click)="playGame()" class="playButton"> {{ stage > 1 ? "Restart" : "Play Game" }}</button>
+          <button (click)="playGame()" class="playButton"> {{ global.continue == 'true' ? "Restart Game" : "Play Game" }}</button>
         </div>
         <br> 
         

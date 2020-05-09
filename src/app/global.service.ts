@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class GlobalService {
 
   stage: any;
+  continue: any;
 
   constructor() { }
 }

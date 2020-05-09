@@ -52,10 +52,14 @@
 }
 .playButton:hover {
 	background-color:#5cbf2a;
+	outline: none;
+	border:0;
 }
 .playButton:active {
 	position:relative;
 	top:1px;
+	outline: none;
+	border: 0;
 }
 
 

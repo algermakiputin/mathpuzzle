@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from "../global.service";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,11 @@ export class HomePage implements OnInit {
   continue: any;
   constructor(
     private router: Router,
-    public global: GlobalService ) { 
+    public global: GlobalService,
+    public storage: Storage ) { 
  
     global.stage = window.localStorage.getItem("stage"); 
-    this.continue = window.localStorage.getItem("continue");
-
+    global.continue = window.localStorage.getItem("continue");
  
   }
 
@@ -27,13 +28,14 @@ export class HomePage implements OnInit {
 
   playGame() {
 
-    if ( parseInt(this.global.stage) > 1) {
+
+    if ( parseInt(this.global.stage) > 1 || isNaN(this.global.stage)) {
    
       window.localStorage.setItem('stage', "1");
       window.localStorage.setItem('continue', "false");
-      this.continue = false;
+      this.global.continue = false;
       this.global.stage = 1;
- 
+       
     }
  
 
