@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';   
 import { Router } from '@angular/router';
 import * as data from "../../assets/puzzle.json";
-import { GlobalService } from "../global.service";
-
-
+import { GlobalService } from "../global.service"; 
+ 
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+ 
 @Component({
   selector: 'app-puzzle',
   templateUrl: './puzzle.page.html',
@@ -20,16 +21,42 @@ export class PuzzlePage implements OnInit {
   errors = []; //  Stores every errors
   nextStage = false; // When all answer are correct, will be set to true to proceed to next level.
    
-  constructor(private router: Router, public global: GlobalService) {
+  constructor(
+    private router: Router, 
+    public global: GlobalService,
+    private admobFree: AdMobFree
+    ) {
      
     global.stage = parseInt(this.get_storage());  
     this.puzzles = data; 
     this.puzzles = this.puzzles.default;
-     
+    
+    this.showBanner();
+    
+  }
+
+  
+
+  showBanner() {
+    const bannerConfig: AdMobFreeBannerConfig = {  
+      isTesting: true,
+      autoShow: true
+    }
+    this.admobFree.banner.config(bannerConfig);
+    
+    this.admobFree.banner.prepare()
+      .then(() => {
+          
+      })
+      .catch(e => console.log(e));
+
   }
 
   ngOnInit() { 
  
+ 
+    
+
     this.start_timer();
  
     this.problem = this.puzzles[this.global.stage];  

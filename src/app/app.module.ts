@@ -6,6 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
+
 import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
@@ -21,7 +23,7 @@ import { GlobalService } from '../app/global.service';
     BrowserModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule, 
     IonicStorageModule.forRoot({
       name: 'database',
       driverOrder: ['indexeddb', 'sqlite', 'websql', 'localstorage']
@@ -30,9 +32,10 @@ import { GlobalService } from '../app/global.service';
   providers: [
     StatusBar,
     SplashScreen,
+    AdMobFree,
     GlobalService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+ 
   ],
   bootstrap: [AppComponent]
 })
